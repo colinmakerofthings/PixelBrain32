@@ -4,7 +4,8 @@
 
 PixelBrain32 is a personal ESP32-based controller for addressable LED strips, designed for use with ESPHome and Home Assistant.
 
-It's a small custom PCB that powers an ESP32 from the same 5 V supply as the LEDs, provides proper signal conditioning and level shifting for WS2812-style strips, and exposes a physical button for local control.
+It's a small custom PCB that powers an ESP32 from the same 5 V supply as the LEDs, provides proper signal conditioning
+and level shifting for WS2812-style strips, and exposes a physical button for local control.
 
 ---
 
