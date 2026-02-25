@@ -1,5 +1,8 @@
 extends: default
 
+ignore: |
+  .markdownlint.yaml
+
 rules:
   # ESPHome configs use inline comments for documentation — give them room
   line-length:
