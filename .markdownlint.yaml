@@ -1,0 +1,8 @@
+default: true
+
+# Line length — relaxed to accommodate the ASCII circuit diagram
+# and table rows which can be naturally wide
+MD013:
+  line_length: 120
+  code_blocks: false  # don't enforce line length inside fenced code blocks
+  tables: false       # don't enforce line length inside tables
