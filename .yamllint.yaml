@@ -4,14 +4,8 @@ ignore: |
   .markdownlint.yaml
 
 rules:
-  # ESPHome configs use inline comments for documentation — give them room
   line-length:
     max: 120
-
-  # ESPHome uses bare true/false — the strict 'truthy' rule flags these
   truthy:
-    allowed-values: ["true", "false", "yes", "no", "on", "off"]
     check-keys: false
-
-  # ESPHome files often have multiple docs or no explicit document start
   document-start: disable
