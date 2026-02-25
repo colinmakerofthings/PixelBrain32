@@ -5,7 +5,7 @@
 PixelBrain32 is a personal ESP32-based controller for addressable LED strips, designed for use with ESPHome and Home Assistant.
 
 It's a small custom PCB that powers an ESP32 from the same 5 V supply as the LEDs, provides proper signal conditioning
-and level shifting for WS2812-style strips, and exposes a physical button for local control.
+for WS2812-style strips, and exposes a physical button for local control.
 
 ---
 
@@ -16,7 +16,6 @@ and level shifting for WS2812-style strips, and exposes a physical button for lo
 - Designed for WS2812B / NeoPixel-compatible LEDs
 - Proper LED data conditioning:
   - Series resistor
-  - 5 V level shifter (74AHCT125)
   - Bulk power smoothing capacitor for LED inrush current
 - Two physical push buttons for local control:
   - SW1 (GPIO33): toggle on/off
@@ -32,7 +31,7 @@ and level shifting for WS2812-style strips, and exposes a physical button for lo
 |-------------|----------------------------------|
 | MCU         | ESP32 DevKit (plug-in headers)   |
 | LED Power   | External 5 V PSU                 |
-| LED Data    | 3.3 V → 5 V level-shifted        |
+| LED Data    | 3.3 V direct drive               |
 | Control     | ESPHome + Home Assistant         |
 | Form factor | Custom PCB                       |
 
@@ -80,16 +79,7 @@ PixelBrain32 exists because:
                          │
                          ├───────────────────────────> ESP32 VIN (+5V)
                          │
-                    74AHCT125
-                  ┌──────────────┐
-      +5V ───────>│ VCC          │
-      GND ───────>│ GND          │
-      GND ───────>│ /OE  (pin 1) │
-                  │              │
-ESP32 GPIO ──[330Ω]──> IN (pin 2)│
-                  │  OUT (pin 3) ├──────────────────> LED DATA (screw terminal)
-                  └──────────────┘
-                  (100 nF bypass cap on VCC–GND, placed close to IC)
+ESP32 GPIO ──[330Ω]────────────────────────────────> LED DATA (screw terminal)
 
 Push Button SW1 (Toggle on/off):
                          +3.3V (internal pull-up via INPUT_PULLUP)
@@ -120,11 +110,9 @@ ESP32 GPIO32 ─────────────────┤
 | J2        | Screw terminal (2P)  | —                     | LED +5V and GND output                     |
 | J3        | Screw terminal (1P)  | —                     | LED DATA output                            |
 | C1        | Electrolytic cap     | 1000 µF, 10 V         | Bulk smoothing, near LED terminal          |
-| C2        | Ceramic cap          | 100 nF                | 74AHCT125 VCC bypass, place close to IC    |
 | C3        | Ceramic cap          | 100 nF                | Across SW1 button terminals (debounce)     |
 | C4        | Ceramic cap          | 100 nF                | Across SW2 button terminals (debounce)     |
-| R1        | Resistor             | 330 Ω                 | Series data resistor, ESP32 → level shifter|
-| U1        | Level shifter        | 74AHCT125             | 3.3 V → 5 V data signal conversion         |
+| R1        | Resistor             | 330 Ω                 | Series data resistor, ESP32 → LED data     |
 | SW1       | Push button          | Tactile / momentary   | GPIO33, INPUT_PULLUP — toggle on/off       |
 | SW2       | Push button          | Tactile / momentary   | GPIO32, INPUT_PULLUP — brightness control  |
 | U2        | MCU                  | ESP32 DevKit          | Socketed on pin headers                    |
