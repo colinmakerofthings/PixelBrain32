@@ -51,7 +51,7 @@ PixelBrain32 exists because:
 - I wanted a clean, single-PSU LED controller
 - I didn't want dangling dev boards or breadboards
 - I wanted something reliable, understandable, and repairable
-- I enjoy designing hardware
+- I enjoy making things
 
 ---
 
